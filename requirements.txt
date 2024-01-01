@@ -1,7 +1,4 @@
 gunicorn
 piexif
-diffusers
-transformers
-accelerate
 qrcode
 filelock
