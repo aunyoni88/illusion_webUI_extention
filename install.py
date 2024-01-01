@@ -11,7 +11,7 @@ except:
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 if debug:
     print(f"Base dir (auto1111) is: {base_dir} from {__file__}")
-ext_dir = os.path.join(base_dir, 'extensions', 'arifScratchRemoverWebUIExtention')
+ext_dir = os.path.join(base_dir, 'extensions', 'illusion_webUI_extention')
 
 if ext_dir not in sys.path:
     if debug:
@@ -25,4 +25,4 @@ else:
 import subprocess
 import launch
 
-launch.run_pip(f"install -r \"{os.path.join(ext_dir, 'requirements.txt')}\"", "requirements for arifScratchRemoverWebUIExtention")
+launch.run_pip(f"install -r \"{os.path.join(ext_dir, 'requirements.txt')}\"", "requirements for illusion_webUI_extention")
