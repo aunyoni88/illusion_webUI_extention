@@ -1,22 +1,46 @@
-import gradio as gr
-import time
-from PIL import Image
-from io import BytesIO
-import base64
-import io
-import piexif
-import piexif.helper
-from datetime import datetime, timezone
-from fastapi import FastAPI, Body
-from time import gmtime, strftime
+# import gradio as gr
+# import time
+# from PIL import Image
+# from io import BytesIO
+# import base64
+# import io
+# import piexif
+# import piexif.helper
+# from datetime import datetime, timezone
+# from fastapi import FastAPI, Body
+# from time import gmtime, strftime
+
 
 from app import inference
+from fastapi import FastAPI, Body, HTTPException
+from fastapi.responses import RedirectResponse, FileResponse
+from fastapi import File, UploadFile, Form
+import gradio as gr
+import time
+from datetime import datetime, timezone
+from pipeline_stable_diffusion_controlnet_inpaint import *
+from scratch_detection import ScratchDetection
+from diffusers import ControlNetModel, DEISMultistepScheduler
+from arif_install import downloadScratchRemoverModel
+from PIL import Image
+import cv2
+import glob
+import shutil
+import os
+from os.path import exists
+import subprocess
+import base64
+from io import BytesIO
+import  numpy
+from sympy import true, false
+
+# from extensions.illusion_webUI_extention.app import inference
 
 
 def illusion_remove_api(_: gr.Blocks, app: FastAPI):
-    @app.post('/sdapi/ai/v1/illusion')
+    @app.post('/sdapi/ai/v1/arif_illusion')
     async def generate_illusion_image(
-            input_image: str = Body("", title='rembg input image'),
+            input_image: str = Body("", title='illusion input image'),
             prompt: str = Body("", title='prompt'),
     ):
         # if not input_image:
@@ -50,7 +74,7 @@ def illusion_remove_api(_: gr.Blocks, app: FastAPI):
         # print("time taken: {0}".format(time.time() - start_time))
 
         return {
-            "success": True,
+            "success": True
             # "message": "Returned output successfully",
             # "server_hit_time": str(utc_time),
             # "server_process_time": time.time() - start_time,

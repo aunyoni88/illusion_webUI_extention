@@ -16,6 +16,8 @@ from time import gmtime, strftime
 
 from app import inference
 
+# from extensions.illusion_webUI_extention.app import inference
+
 
 logger = logging.getLogger(__name__)
 
